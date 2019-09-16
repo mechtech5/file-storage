@@ -35,7 +35,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-      $path = $request->file('file')->store('avatars');
+      $user_id = auth()->user()->id;
+      $dir = $user_id.'/'.date("Y").'/'.date("F");
+      $path = $request->file('file')->store($dir);
 
       Post::create([
         'image' => $path
